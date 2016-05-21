@@ -6,7 +6,7 @@ public interface Game {
 	public void close();
 	public String result();
 	public boolean isRunning();
-	boolean running=false;
+
 	
 
 }
