@@ -8,7 +8,7 @@ import java.io.*;
 
 public class Reaction extends Game implements ActionListener{
 	
-	private ImageIcon pic,blu,red;
+	private ImageIcon type1,type2,type3;
 	private JLabel score_v=new JLabel();
 	private JButton[] point=new JButton[10];
 	private int score=0;
@@ -23,37 +23,37 @@ public class Reaction extends Game implements ActionListener{
 		
 		Image img=null;
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/pic.jpg"));
+			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/type_1.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pic=new ImageIcon(img);
+		type1=new ImageIcon(img);
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/red.jpg"));
+			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/type_2.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		red=new ImageIcon(img);
+		type2=new ImageIcon(img);
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/blue.jpg"));
+			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/type_3.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		blu=new ImageIcon(img);
+		type3=new ImageIcon(img);
 		score_v.setSize(150,50);
 		score_v.setLocation(0,0);
 		score_v.setText("Score:"+score);
 		frame.add(score_v);
 		for(int i=0;i<10;i++){
-		if(i<3){point[i]=new JButton(red);}
-		else if(i<6){point[i]=new JButton(blu);}
-		else {point[i]=new JButton(pic);}
+		if(i<3){point[i]=new JButton(type2);}
+		else if(i<6){point[i]=new JButton(type3);}
+		else {point[i]=new JButton(type1);}
 			
 		point[i].setSize(50,50);
-		point[i].setLocation((int)(Math.random()*1000)%400,(int)(Math.random()*1000)%400);
+		point[i].setLocation((int)(Math.random()*1000)%8*50,(int)(Math.random()*1000)%8*50);
 		point[i].addActionListener(this);
 		point[i].setActionCommand(""+i);
 		frame.add(point[i]);
