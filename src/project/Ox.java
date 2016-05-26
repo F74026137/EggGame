@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
-public class Ox implements ActionListener{
+public class Ox extends Game implements ActionListener{
 	private boolean running=false;
 	private JFrame frame=new JFrame();
 	private ImageIcon em,img_o,img_x;
@@ -16,21 +16,21 @@ public class Ox implements ActionListener{
 	public Ox(){
 		Image img=null;
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/e.png"));
+			img = ImageIO.read (new File("img/e.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		em=new ImageIcon(img);
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/O.png"));
+			img = ImageIO.read (new File("img/O.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		img_o=new ImageIcon(img);
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/X.png"));
+			img = ImageIO.read (new File("img/X.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +52,8 @@ public class Ox implements ActionListener{
 	public void run(){
 		running=true;				
 		frame.setVisible(true);
-		
+	//	while (running);
+		while(running)try{Thread.sleep(200);}catch(Exception e){e.printStackTrace();};
 				
 		
 	}
@@ -84,7 +85,7 @@ public class Ox implements ActionListener{
 	        }
 	        else if (map[j]==map[j+2]){
 	        	if(map[j]!=0){
-	            	if(j+1==0)
+	            	if(map[j+1]==0)
 	            		i=j+1;
 	            }
 	        }
@@ -105,7 +106,7 @@ public class Ox implements ActionListener{
 	        }
 	        else if (map[j]==map[j+6]){
 	        	if(map[j]!=0){
-	            	if(j+3==0)
+	            	if(map[j+3]==0)
 	            		i=j+3;
 	            }
 	        }
@@ -192,7 +193,7 @@ public class Ox implements ActionListener{
 	                running=false;
 	            }
 	        }
-	        if((map[2]==map[4])&&(map[0]==map[6])){
+	        if((map[2]==map[4])&&(map[2]==map[6])){
 	            if(map[2]!=0){
 	                winner=map[2];
 	                running=false;

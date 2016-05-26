@@ -9,9 +9,9 @@ import java.io.*;
 public class Reaction extends Game implements ActionListener{
 	
 	private ImageIcon type1,type2,type3;
-	private JLabel score_v=new JLabel();
+	private JLabel score_v=new JLabel(),time_v=new JLabel();
 	private JButton[] point=new JButton[10];
-	private int score=0;
+	private int score=0,time=30,target=120;
 	public Reaction (){
 		frame.setSize(500,500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
@@ -23,37 +23,42 @@ public class Reaction extends Game implements ActionListener{
 		
 		Image img=null;
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/type_1.jpg"));
+			img = ImageIO.read (new File("img/type_1.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		type1=new ImageIcon(img);
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/type_2.jpg"));
+			img = ImageIO.read (new File("img/type_2.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		type2=new ImageIcon(img);
 		try {
-			img = ImageIO.read (new File("D:\\course/java/project/src/project/img/type_3.jpg"));
+			img = ImageIO.read (new File("img/type_3.jpg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		type3=new ImageIcon(img);
-		score_v.setSize(150,50);
+		score_v.setSize(100,50);
 		score_v.setLocation(0,0);
 		score_v.setText("Score:"+score);
 		frame.add(score_v);
+		time_v.setSize(100,50);
+		time_v.setLocation(300,0);
+		time_v.setText("Time:"+time);
+		frame.add(time_v);
+		
 		for(int i=0;i<10;i++){
 		if(i<3){point[i]=new JButton(type2);}
 		else if(i<6){point[i]=new JButton(type3);}
 		else {point[i]=new JButton(type1);}
 			
 		point[i].setSize(50,50);
-		point[i].setLocation((int)(Math.random()*1000)%8*50,(int)(Math.random()*1000)%8*50);
+		point[i].setLocation((int)(Math.random()*1000)%8*50,(int)(Math.random()*1000)%7*50+50);
 		point[i].addActionListener(this);
 		point[i].setActionCommand(""+i);
 		frame.add(point[i]);
@@ -93,6 +98,7 @@ public class Reaction extends Game implements ActionListener{
 			if(i%20==5)point[t1].setVisible(false);
 			if(i%20==14)point[t3].setVisible(false);
 			if(i%20==17)point[t2].setVisible(false);
+			if(i%10==0)time_v.setText("Time:"+time--);
 		}
 		
 		
@@ -125,7 +131,7 @@ public class Reaction extends Game implements ActionListener{
 	public String result(){
 		String res="";
 		System.out.println("Scole="+score);
-		if(score>120){
+		if(score>target){
 			res="Clear";
 		}
 		else res="Failed";
