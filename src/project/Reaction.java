@@ -14,7 +14,7 @@ public class Reaction extends Game implements ActionListener{
 	private int score=0,time=30,target=120;
 	public Reaction (){
 		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);					
 		frame.setLayout(null);
 		frame.setLocation(700, 300);
 		frame.getContentPane().setBackground(Color.white);
