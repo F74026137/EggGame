@@ -22,7 +22,7 @@ public class Quiz extends Game implements ActionListener{
 	}
 	public Quiz(){
 		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);					
 		frame.setLayout(null);
 		frame.setLocation(700, 300);
 		frame.getContentPane().setBackground(Color.white);
