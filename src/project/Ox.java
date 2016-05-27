@@ -38,7 +38,7 @@ public class Ox extends Game implements ActionListener{
 		img_x=new ImageIcon(img);
 		
 		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);					
 		frame.setLayout(null);
 		for(int i=0;i<9;i++){
 		icon[i]=empty(i);
