@@ -7,43 +7,35 @@ import java.awt.*;
 import java.io.*;
 
 public class Ox extends Game implements ActionListener{
-	private boolean running=false;
-	private JFrame frame=new JFrame();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	private ImageIcon em,img_o,img_x;
-	private int turn=0,winner=0;
+	private int turn=0,winner=2;
 	private int[] map={0,0,0,0,0,0,0,0,0};
 	JButton[] icon=new JButton[9];
 	public Ox(){
-		Image img=null;
-		try {
-			img = ImageIO.read (new File("img/e.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		em=new ImageIcon(img);
-		try {
-			img = ImageIO.read (new File("img/O.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		img_o=new ImageIcon(img);
-		try {
-			img = ImageIO.read (new File("img/X.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		img_x=new ImageIcon(img);
+
+		em=new ImageIcon("img/e.png");
+
+		img_o=new ImageIcon("img/O.png");
+
+		img_x=new ImageIcon("img/X.png");
 		
-		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
-		frame.setLayout(null);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);	
+		this.setSize(500,500);
+		this.setLocation(L_X,L_Y);
+		this.addWindowListener(new W_Listener());;			
+		this.setLayout(null);
+		this.setResizable(false);
+		
 		for(int i=0;i<9;i++){
 		icon[i]=empty(i);
 		icon[i].addActionListener(this);
-		frame.add(icon[i]);
+		this.add(icon[i]);
 		icon[i].setActionCommand(""+i);
 		}
 		
@@ -51,7 +43,7 @@ public class Ox extends Game implements ActionListener{
 	
 	public void run(){
 		running=true;				
-		frame.setVisible(true);
+		this.setVisible(true);
 	//	while (running);
 		while(running)try{Thread.sleep(200);}catch(Exception e){e.printStackTrace();};
 				
@@ -60,8 +52,8 @@ public class Ox extends Game implements ActionListener{
 
 	
 	public void actionPerformed(ActionEvent e){
-		int i =Integer.valueOf(e.getActionCommand());
 		
+		int i =Integer.valueOf(e.getActionCommand());		
 		if(running){
 		icon[i].setIcon(img_o);
 		map[i]=1;
@@ -222,13 +214,6 @@ public class Ox extends Game implements ActionListener{
 
 	public boolean isRunning(){
 		return running;
-	}
-	public void close(){
-		//frame.setVisible(false);
-		frame.dispose();
-		//System.out.println(result());
-		frame.setVisible(false);
-		
 	}
 	
 	public String result(){

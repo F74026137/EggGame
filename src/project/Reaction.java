@@ -8,49 +8,44 @@ import java.io.*;
 
 public class Reaction extends Game implements ActionListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ImageIcon type1,type2,type3;
 	private JLabel score_v=new JLabel(),time_v=new JLabel();
 	private JButton[] point=new JButton[10];
 	private int score=0,time=30,target=120;
 	public Reaction (){
-		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);					
-		frame.setLayout(null);
-		frame.setLocation(700, 300);
-		frame.getContentPane().setBackground(Color.white);
+		this.setSize(500,500);
+		this.addWindowListener(new W_Listener());				
+		this.setLayout(null);
+		this.setLocation(L_X,L_Y);
+		this.getContentPane().setBackground(Color.white);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);	
+		this.setResizable(false);
+		setMouse();
 		
+		ImageIcon img=new ImageIcon("img/grass.jpg");
+		JLabel bg=new JLabel(img);
+		bg.setSize(S_X, S_Y);
+		this.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
+		JPanel p= (JPanel)this.getContentPane();
+		p.setOpaque(false);
 		
+		type1=new ImageIcon("img/type_1.png");
 		
-		Image img=null;
-		try {
-			img = ImageIO.read (new File("img/type_1.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		type1=new ImageIcon(img);
-		try {
-			img = ImageIO.read (new File("img/type_2.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		type2=new ImageIcon(img);
-		try {
-			img = ImageIO.read (new File("img/type_3.jpg"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		type3=new ImageIcon(img);
-		score_v.setSize(100,50);
+		type2=new ImageIcon("img/type_2.png");
+		
+		type3=new ImageIcon("img/type_3.png");
+		score_v.setSize(100,50);    
 		score_v.setLocation(0,0);
 		score_v.setText("Score:"+score);
-		frame.add(score_v);
+		this.add(score_v);
 		time_v.setSize(100,50);
 		time_v.setLocation(300,0);
 		time_v.setText("Time:"+time);
-		frame.add(time_v);
+		this.add(time_v);
 		
 		for(int i=0;i<10;i++){
 		if(i<3){point[i]=new JButton(type2);}
@@ -58,20 +53,23 @@ public class Reaction extends Game implements ActionListener{
 		else {point[i]=new JButton(type1);}
 			
 		point[i].setSize(50,50);
-		point[i].setLocation((int)(Math.random()*1000)%8*50,(int)(Math.random()*1000)%7*50+50);
+		point[i].setLocation((int)(Math.random()*1000)%8*50,(int)(Math.random()*1000)%5*50+150);
 		point[i].addActionListener(this);
 		point[i].setActionCommand(""+i);
-		frame.add(point[i]);
+		this.add(point[i]);
 		point[i].setVisible(false);
+		point[i].setContentAreaFilled(false);
+		point[i].setBorderPainted(false);
 		}		
 	}
 	
 	public void run(){
 		running=true;				
-		frame.setVisible(true);
+		this.setVisible(true);
 		int c;
 		int t1=0,t2=0,t3=0;
 		for(int i=0;i <300;i++){
+			if(!running)break;
 			c=(int) (Math.random()*100);
 			switch(i%20){
 			case 1:
@@ -103,13 +101,7 @@ public class Reaction extends Game implements ActionListener{
 		
 		
 		
-	}
-	
-	
-	
-	
-	
-	
+	}	
 	
 	
 	public void actionPerformed(ActionEvent e){
@@ -125,12 +117,24 @@ public class Reaction extends Game implements ActionListener{
 	
 	
 	
-	
+	private void setMouse(){
+		Image img=null;
+		try {
+			img = ImageIO.read (new File("img/humer.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Cursor cr =Toolkit.getDefaultToolkit().createCustomCursor(img, new Point(20,20), "humer");
+		
+		this.setCursor(cr);
+		
+	}
 	
 	
 	public String result(){
 		String res="";
-		System.out.println("Scole="+score);
+		//System.out.println("Scole="+score);
 		if(score>target){
 			res="Clear";
 		}

@@ -13,7 +13,7 @@ public class Main {
 	    
 	    //ox=new Reaction();
 	    //ox.run();
-	    ox.close();
+	   // ox.close();
 	    System.out.println(ox.result());
 	}
 
