@@ -1,10 +1,12 @@
 package project;
-
-import java.awt.event.*;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.awt.event.*;
+import java.io.FileInputStream;
+import java.util.Scanner;
+
+import javax.swing.*;
+
+
 
 public class Ox extends Game implements ActionListener{
 	/**
@@ -17,13 +19,17 @@ public class Ox extends Game implements ActionListener{
 	private int turn=0,winner=2;
 	private int[] map={0,0,0,0,0,0,0,0,0};
 	JButton[] icon=new JButton[9];
+	
 	public Ox(){
-
+		this.loop=true;
+		this.name="OOXX";
 		em=new ImageIcon("img/e.png");
 
 		img_o=new ImageIcon("img/O.png");
 
 		img_x=new ImageIcon("img/X.png");
+		
+		this.getContentPane().setBackground(Color.white);
 		
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);	
 		this.setSize(500,500);
@@ -35,6 +41,8 @@ public class Ox extends Game implements ActionListener{
 		for(int i=0;i<9;i++){
 		icon[i]=empty(i);
 		icon[i].addActionListener(this);
+		icon[i].setContentAreaFilled(false);
+		
 		this.add(icon[i]);
 		icon[i].setActionCommand(""+i);
 		}
@@ -42,17 +50,62 @@ public class Ox extends Game implements ActionListener{
 	}
 	
 	public void run(){
-		running=true;				
+		running=true;	
+		
 		this.setVisible(true);
+		this.help();
+		
 	//	while (running);
 		while(running)try{Thread.sleep(200);}catch(Exception e){e.printStackTrace();};
 				
 		
 	}
 
+	void help(){
+		String str="";
+		try{
+			Scanner in=new Scanner(new FileInputStream("help/"+name+".txt"));
+			while(in.hasNext()){
+			str=str.concat(in.nextLine());}
+			in.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		JPanel frame=new JPanel();
+	
+		frame.setSize(S_X/2, S_Y/2);
+		frame.setLocation(S_X/4,S_Y/5);
+		frame.setLayout(new BorderLayout());
+		
+		JTextPane text=new JTextPane();
+		text.setSize(400,300);
+		text.setEditable(false);
+		text.setText(str);
+		
+		JButton btn=new JButton("OK");
+		btn.setSize(50,40);
+		btn.setContentAreaFilled(false);		
+		btn.addActionListener(this);
+		frame.add(text,BorderLayout.CENTER);
+		frame.add(btn,BorderLayout.SOUTH);
+		frame.setVisible(true);
+		this.getLayeredPane().add(frame,new Integer(Integer.MAX_VALUE));
+		try{
+			while(loop){Thread.sleep(200);}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		frame.setVisible(false);
+		
+		
+		
+	}
 	
 	public void actionPerformed(ActionEvent e){
-		
+		if(e.getActionCommand().equals("OK")){
+			loop=false;
+		}
+		else{
 		int i =Integer.valueOf(e.getActionCommand());		
 		if(running){
 		icon[i].setIcon(img_o);
@@ -60,7 +113,7 @@ public class Ox extends Game implements ActionListener{
 		turn++;
 		checkEnd();
 		ai_action();}						
-		
+		}
 	}
 	private void ai_action(){
 		if(running){

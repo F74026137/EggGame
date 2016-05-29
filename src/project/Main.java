@@ -2,7 +2,9 @@ package project;
 
 public class Main {
 	public static void main(String[] args){
+		
 		Game ox=new Quiz();
+	
 		ox.run();
 		
 		//System.out.println(ox.isRunning());
@@ -13,7 +15,7 @@ public class Main {
 	    
 	    //ox=new Reaction();
 	    //ox.run();
-	   // ox.close();
+	    ox.close();
 	    System.out.println(ox.result());
 	}
 

@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class Reaction extends Game implements ActionListener{
 	
@@ -16,7 +17,11 @@ public class Reaction extends Game implements ActionListener{
 	private JLabel score_v=new JLabel(),time_v=new JLabel();
 	private JButton[] point=new JButton[10];
 	private int score=0,time=30,target=120;
+
 	public Reaction (){
+		this.name="Reaction";
+		this.loop=true;
+		
 		this.setSize(500,500);
 		this.addWindowListener(new W_Listener());				
 		this.setLayout(null);
@@ -38,13 +43,16 @@ public class Reaction extends Game implements ActionListener{
 		type2=new ImageIcon("img/type_2.png");
 		
 		type3=new ImageIcon("img/type_3.png");
+		
 		score_v.setSize(100,50);    
 		score_v.setLocation(0,0);
 		score_v.setText("Score:"+score);
+		score_v.setFont(new Font(Font.DIALOG,Font.BOLD ,20));
 		this.add(score_v);
 		time_v.setSize(100,50);
 		time_v.setLocation(300,0);
 		time_v.setText("Time:"+time);
+		time_v.setFont(new Font(Font.DIALOG,Font.BOLD ,20));
 		this.add(time_v);
 		
 		for(int i=0;i<10;i++){
@@ -66,6 +74,9 @@ public class Reaction extends Game implements ActionListener{
 	public void run(){
 		running=true;				
 		this.setVisible(true);
+		
+		this.help();
+		
 		int c;
 		int t1=0,t2=0,t3=0;
 		for(int i=0;i <300;i++){
@@ -103,15 +114,59 @@ public class Reaction extends Game implements ActionListener{
 		
 	}	
 	
+	void help(){
+		String str="";
+		try{
+			Scanner in=new Scanner(new FileInputStream("help/"+name+".txt"));
+			while(in.hasNext()){
+			str=str.concat(in.nextLine());}
+			in.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		JPanel frame=new JPanel();
+	
+		frame.setSize(S_X/2, S_Y/2);
+		frame.setLocation(S_X/4,S_Y/5);
+		frame.setLayout(new BorderLayout());
+		
+		JTextPane text=new JTextPane();
+		text.setSize(400,300);
+		text.setEditable(false);
+		text.setText(str);
+		
+		JButton btn=new JButton("OK");
+		btn.setSize(50,40);
+		btn.setContentAreaFilled(false);		
+		btn.addActionListener(this);
+		frame.add(text,BorderLayout.CENTER);
+		frame.add(btn,BorderLayout.SOUTH);
+		frame.setVisible(true);
+		this.getLayeredPane().add(frame,new Integer(Integer.MAX_VALUE));
+		try{
+			while(loop){Thread.sleep(200);}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		frame.setVisible(false);
+		
+		
+		
+	}
 	
 	public void actionPerformed(ActionEvent e){
+		if(e.getActionCommand().equals("OK")){
+			loop=false;
+		}
+		else{
+		
 		int state=Integer.valueOf(e.getActionCommand());
 		point[state].setVisible(false);
 		if(state<3)score+=10;
 		else if(state<6)score+=5;
 		else score++;
 		score_v.setText("Score:"+score);
-		
+		}
 	}
 	
 	
@@ -133,6 +188,7 @@ public class Reaction extends Game implements ActionListener{
 	
 	
 	public String result(){
+		
 		String res="";
 		//System.out.println("Scole="+score);
 		if(score>target){

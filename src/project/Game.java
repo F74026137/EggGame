@@ -13,13 +13,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-
+import java.util.*;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 
@@ -28,8 +26,39 @@ abstract public class Game extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected boolean running=false;
+	protected boolean running=false,c_flag=false,loop=false;
 	static public int L_X=700,L_Y=300,S_X=500,S_Y=500; //視窗位置 尺寸
+	protected String name;
+	
+	void help(){
+		String str="";
+		try{
+			Scanner in=new Scanner(new FileInputStream("help/"+name+".txt"));
+			while(in.hasNext()){
+			str=str.concat(in.nextLine());}
+			in.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		JPanel frame=new JPanel();
+	
+		frame.setSize(400, 300);
+		JTextPane text=new JTextPane();
+		text.setSize(400,300);
+		text.setEditable(false);
+		text.setText(str);
+		
+		JButton btn=new JButton("OK");
+		btn.setSize(50,40);
+		btn.setContentAreaFilled(false);		
+		//btn.addActionListener(this);
+		frame.add(text,BorderLayout.CENTER);
+		frame.add(btn,BorderLayout.SOUTH);
+		frame.setVisible(true);
+		
+		
+		
+	}
 	
 	void run(){
 		running=true;				
@@ -39,9 +68,12 @@ abstract public class Game extends JFrame {
 		return running;
 	}
 	public void close(){
-		this.dispose();		
+			
 		this.setVisible(false);		
-		running=false;
+		this.running=false;
+		this.loop=false;
+		this.setVisible(false);	
+		this.dispose();	
 	}
 	abstract public String result();
 	
@@ -76,7 +108,10 @@ abstract public class Game extends JFrame {
 		public void windowClosing(WindowEvent arg0) {
 			// TODO Auto-generated method stub
 			CheckWindow ch=new CheckWindow();
-			ch.setVisible(true);			
+			if(!loop){
+			ch.setVisible(true);
+			c_flag=true;
+			}
 			
 		}
 
@@ -115,24 +150,39 @@ abstract public class Game extends JFrame {
 
 
 		public CheckWindow(){
+			this.setAlwaysOnTop(true);
+			this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+			this.setResizable(false);
+			ImageIcon img=new ImageIcon("img/check_b.jpg");
+			JLabel bg=new JLabel(img);
+			bg.setSize(250,150);
+			this.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
+			JPanel p= (JPanel) this.getContentPane();
+			p.setOpaque(false);
+			
 			setSize(250,150);
 			setLocation(L_X+S_X/4,L_Y+S_Y/4);
 			setLayout(new BorderLayout());									
 			JLabel text=new JLabel(" 確定關閉? \n(未完成遊戲以失敗論)");
 			text.setFont(new Font("SansSerif",Font.PLAIN ,15));
+			text.setOpaque(false);
 			add(text,BorderLayout.CENTER);
 			
 			JPanel button = new JPanel();
 			button.setLayout(new FlowLayout());
+			button.setOpaque(false);
+			
 			JButton exit=new JButton("離開");
 			exit.setActionCommand("exit");
+			exit.setFont(new Font("SansSerif",Font.PLAIN,15));
+			exit.addActionListener(this);
+			exit.setContentAreaFilled(false);;
 			
 			JButton back=new JButton("返回");
-			exit.setFont(new Font("SansSerif",Font.PLAIN,15));
-			back.setFont(new Font("SansSerif",Font.PLAIN,15));
 			back.setActionCommand("back");
-			exit.addActionListener(this);
+			back.setFont(new Font("SansSerif",Font.PLAIN,15));
 			back.addActionListener(this);
+			back.setContentAreaFilled(false);
 			
 			button.add(exit);
 			button.add(back);
@@ -141,6 +191,7 @@ abstract public class Game extends JFrame {
 
 		
 		public void actionPerformed(ActionEvent e) {
+			c_flag=false;
 			if(e.getActionCommand().equals("exit")){
 				close();						
 				dispose();

@@ -1,0 +1,47 @@
+Game.java:
+	Game是一個用來繼承的Class,裡面有寫好關於小遊戲的共通method:
+	close()
+	help():顯示說明視窗的method,說明內容在"help/遊戲名稱.txt"
+	幾個控制參數:
+	boolean(預設為false):
+	running:來偵測遊戲有沒有開啟的參數,用法->run()的開頭把它設為true,run()的途中的迴圈中加入偵測,以免強制中斷(按X)後run()還在迴圈中(遊戲沒停止); 
+	loop:help裡面用到的,來block住說明視窗
+	c_flag:Window的X按下去的flag,(可用在run()偵測,以便暫停)
+ 	String:
+	name:設定遊戲名稱(跟說明視窗關聯)
+	
+	預設參數(可以拿來使用):
+	L_X=700  視窗起始位置x座標
+	L_Y=300  視窗起始位置y座標
+	S_X=500  視窗Size x
+	S_Y=500  視窗Size y
+	
+	
+
+
+還有兩個inner Class:
+
+W_Liatener:
+	在小遊戲的主JFrame裡.addWindowListener(new W_Listenr),來控制按X的動作,同時.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE)來避免重複動作。
+CheckWindow:
+	確認離開視窗
+
+以上,是在遊戲的class繼承Game的用法
+
+然後,在遊戲都有繼承Game的情況下:
+	Main就能這樣call
+
+	Game game;
+
+	game=new Ox(); //第一個遊戲
+	game.run();
+	game.close();
+
+	......
+
+	game=new Reaction(); //第二個遊戲
+	game.run();
+	game.closs();
+
+	......
+

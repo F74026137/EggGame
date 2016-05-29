@@ -32,7 +32,9 @@ public class Quiz extends Game implements ActionListener{
 		
 		return res;
 	}
-	public Quiz(){				
+	public Quiz(){		
+		this.name="Quiz";
+		this.loop=true;
 		this.setSize(S_X,S_Y);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);					
 		this.setLayout(null);
@@ -47,6 +49,7 @@ public class Quiz extends Game implements ActionListener{
 		this.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
 		JPanel p= (JPanel)this.getContentPane();
 		p.setOpaque(false);
+		
 		try{
 			Scanner in=new Scanner(new FileInputStream("quiz/num.txt"));
 			num=in.nextInt();
@@ -79,7 +82,7 @@ public class Quiz extends Game implements ActionListener{
 		this.add(panel,BorderLayout.NORTH);
 		
 		question.setLocation(100,50);
-		question.setSize(300,150);
+		question.setSize(300,170);
 		question.setFont(font);
 		question.setEditable(false);
 		question.setOpaque(false);
@@ -95,7 +98,7 @@ public class Quiz extends Game implements ActionListener{
 			choice[i].addActionListener(this);
 			choice[i].setFont(font);
 			choice[i].setSize(300,50);
-			choice[i].setBackground(Color.white);
+			choice[i].setVisible(false);
 			choice[i].setLocation(0,0+i*50);
 			choice[i].setContentAreaFilled(false);
 			panel1.add(choice[i]);			
@@ -117,6 +120,11 @@ public class Quiz extends Game implements ActionListener{
 		QuizForm quiz;
 		running=true;
 		this.setVisible(true);
+		this.help();
+		
+		for(int i=0;i<4;i++)
+		choice[i].setVisible(true);
+		
 		for(int i=0;i<Q_n;i++){
 			if(!running)break;
 			if(i>0){
@@ -164,6 +172,9 @@ public class Quiz extends Game implements ActionListener{
 					break;
 				}
 				else if(!running)break;
+				else if(c_flag){
+					while(c_flag)Thread.sleep(200);
+				}
 				else Thread.sleep(100);
 				if(k%10==0)time_v.setText("Time:"+time--);
 			}
@@ -176,10 +187,64 @@ public class Quiz extends Game implements ActionListener{
 		
 	}
 	
+	void help(){
+		String str="";
+		try{
+			Scanner in=new Scanner(new FileInputStream("help/"+name+".txt"));
+			while(in.hasNext()){
+			str=str.concat(in.nextLine());}
+			in.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		JLabel back_h=new JLabel(new ImageIcon("img/"+name+"_h.jpg"));
+		back_h.setSize(S_X/2, S_Y/2);
+		back_h.setLocation(S_X/4,S_Y/5);
+		back_h.setOpaque(true);
+		JPanel frame=new JPanel();
+		this.add(back_h,new Integer(Integer.MAX_VALUE));
+		
+		frame.setOpaque(false);
+		frame.setSize(S_X/2, S_Y/2);
+		frame.setLocation(S_X/4,S_Y/5);
+		frame.setLayout(new BorderLayout());
+		
+		JTextPane text=new JTextPane();
+		text.setSize(400,300);
+		text.setEditable(false);
+		text.setText(str);
+		text.setOpaque(false);
+		text.setFont(font);
+		
+		
+		JButton btn=new JButton("OK");
+		btn.setSize(50,40);
+		btn.setContentAreaFilled(false);		
+		btn.addActionListener(this);
+		frame.add(text,BorderLayout.CENTER);
+		frame.add(btn,BorderLayout.SOUTH);
+		frame.setVisible(true);
+		this.getLayeredPane().add(frame,new Integer(Integer.MAX_VALUE));
+		try{
+			while(loop){Thread.sleep(200);}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		frame.setVisible(false);
+		back_h.setVisible(false);
+		
+		
+	}
 	
 	
 	
 	public void actionPerformed(ActionEvent e){
+		if(e.getActionCommand().equals("OK")){
+			loop=false;
+		}
+		else{
+		
 		time=TIME;
 		time_v.setText("Time:"+time);
 		finish=true;
@@ -191,4 +256,5 @@ public class Quiz extends Game implements ActionListener{
 		else y_n.setIcon(wrong);
 		
 			}
+	}
 }
