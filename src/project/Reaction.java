@@ -19,8 +19,10 @@ public class Reaction extends Game implements ActionListener{
 	private int score=0,time=30,target=120;
 
 	public Reaction (){
+
 		this.name="Reaction";
 		this.loop=true;
+
 		
 		this.setSize(500,500);
 		this.addWindowListener(new W_Listener());				

@@ -38,6 +38,7 @@ public class Ox extends Game implements ActionListener{
 		this.setLayout(null);
 		this.setResizable(false);
 		
+	
 		for(int i=0;i<9;i++){
 		icon[i]=empty(i);
 		icon[i].addActionListener(this);

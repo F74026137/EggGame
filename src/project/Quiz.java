@@ -32,6 +32,7 @@ public class Quiz extends Game implements ActionListener{
 		
 		return res;
 	}
+
 	public Quiz(){		
 		this.name="Quiz";
 		this.loop=true;
@@ -66,6 +67,7 @@ public class Quiz extends Game implements ActionListener{
 		panel.setSize(500,20);
 		panel.setOpaque(false);
 		panel.setLayout(null);
+
 		
 		time_v.setText("Time:"+time);
 		time_v.setFont(font);
