@@ -1,14 +1,14 @@
 
-
+import Chihane1002.Cooking;
 public class Main {
 	public static void main(String[] args){
 		
-		Game ox=new Quiz();
+		Cooking ox=new Cooking();
 	
 		ox.run();
-	    ox.close();
+	    //ox.close();
 	    System.out.println(ox.result());
-	    
+	   /* 
 	    ox=new Reaction();
 	    
 	    ox.run();
@@ -19,7 +19,7 @@ public class Main {
 	    ox.run();
 	    ox.close();
 	    System.out.println(ox.result());
-	    
+	    */
 	}
 
 }
