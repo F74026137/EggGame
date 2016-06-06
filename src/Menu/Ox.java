@@ -1,4 +1,4 @@
-package project;
+package Menu;
 
 import java.awt.*;
 import java.awt.event.*;

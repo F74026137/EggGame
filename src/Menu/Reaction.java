@@ -1,6 +1,4 @@
-package project;
-
-
+package Menu;
 
 import java.awt.event.*;
 import javax.imageio.ImageIO;

@@ -1,4 +1,4 @@
-package project;
+package Menu;
 
 
 
@@ -46,9 +46,7 @@ public class Game extends JFrame {
 		this.setVisible(false);	
 		this.dispose();	
 	}
-	public String result(){
-		return "";
-	}
+//	abstract public String result();
 	
 	protected void setMouse(String route){
 		Image img=null;
