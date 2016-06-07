@@ -72,6 +72,12 @@ public class M extends JFrame implements ActionListener{
 			Scanner scanner0 = new Scanner(new FileInputStream("bin/keep.txt"));
 			int being = scanner0.nextInt();
 			int which = scanner0.nextInt();
+			int n1 = scanner0.nextInt();
+			int n2 = scanner0.nextInt();
+			int n3 = scanner0.nextInt();
+			int n4 = scanner0.nextInt();
+			int n5 = scanner0.nextInt();
+			
 			scanner0.close();
 			
 			//labels
@@ -104,6 +110,60 @@ public class M extends JFrame implements ActionListener{
 			label3.setBounds(92,0,150,75);
 			add(label3);
 			
+			icon = new ImageIcon(ImageIO.read(new File("img/1.png")));
+			JLabel label4 = new JLabel(icon);
+			label4.setBounds(500,200,60,60);
+			add(label4);
+			icon = new ImageIcon(ImageIO.read(new File("img/2.png")));
+			JLabel label5 = new JLabel(icon);
+			label5.setBounds(500,270,60,60);
+			add(label5);
+			icon = new ImageIcon(ImageIO.read(new File("img/3.png")));
+			JLabel label6 = new JLabel(icon);
+			label6.setBounds(500,340,60,60);
+			add(label6);
+			icon = new ImageIcon(ImageIO.read(new File("img/4.png")));
+			JLabel label7 = new JLabel(icon);
+			label7.setBounds(500,410,60,60);
+			add(label7);
+			icon = new ImageIcon(ImageIO.read(new File("img/5.png")));
+			JLabel label8 = new JLabel(icon);
+			label8.setBounds(500,480,60,60);
+			add(label8);
+			
+			if(being == 1){
+				
+				JLabel label9 = new JLabel();
+				label9.setBounds(565,200,60,60);
+				label9.setText(""+n1);
+				label9.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label9);
+				JLabel label10 = new JLabel();
+				label10.setBounds(565,270,60,60);
+				label10.setText(""+n2);
+				label10.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label10);
+				JLabel label11 = new JLabel();
+				label11.setBounds(565,340,60,60);
+				label11.setText(""+n3);
+				label11.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label11);
+				JLabel label12 = new JLabel();
+				label12.setBounds(565,410,60,60);
+				label12.setText(""+n4);
+				label12.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label12);
+				JLabel label13 = new JLabel();
+				label13.setBounds(565,480,60,60);
+				label13.setText(""+n5);
+				label13.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label13);
+				
+				
+			}
+			
+			
+			
 			
 			//buttons
 			icon = new ImageIcon(ImageIO.read(new File("img/cultivate.gif")));
@@ -141,7 +201,12 @@ public class M extends JFrame implements ActionListener{
 			button5.addActionListener(this);
 			add(button5);
 
-			
+			JButton button6 = new JButton();
+			button6.setBounds(100,800,300,90);
+			button6.setText("孵化");
+			button6.setActionCommand("btn6");
+			button6.addActionListener(this);
+			add(button6);
 			
 			setVisible(true);
 
@@ -168,7 +233,11 @@ public class M extends JFrame implements ActionListener{
 			Scanner scanner0 = new Scanner(new FileInputStream("data/"+name+"/keep.txt"));
 			int being = scanner0.nextInt();
 			int which = scanner0.nextInt();
-			
+			int n1 = scanner0.nextInt();
+			int n2 = scanner0.nextInt();
+			int n3 = scanner0.nextInt();
+			int n4 = scanner0.nextInt();
+			int n5 = scanner0.nextInt();
 			
 			//labels
 //			Image img ;// ImageIO.read (new File("img/egg5.png"));
@@ -199,6 +268,56 @@ public class M extends JFrame implements ActionListener{
 			label3.setBounds(92,0,150,75);
 			add(label3);
 			
+			if(being == 1){
+				icon = new ImageIcon(ImageIO.read(new File("img/1.png")));
+				JLabel label4 = new JLabel(icon);
+				label4.setBounds(500,200,60,60);
+				add(label4);
+				icon = new ImageIcon(ImageIO.read(new File("img/2.png")));
+				JLabel label5 = new JLabel(icon);
+				label5.setBounds(500,270,60,60);
+				add(label5);
+				icon = new ImageIcon(ImageIO.read(new File("img/3.png")));
+				JLabel label6 = new JLabel(icon);
+				label6.setBounds(500,340,60,60);
+				add(label6);
+				icon = new ImageIcon(ImageIO.read(new File("img/4.png")));
+				JLabel label7 = new JLabel(icon);
+				label7.setBounds(500,410,60,60);
+				add(label7);
+				icon = new ImageIcon(ImageIO.read(new File("img/5.png")));
+				JLabel label8 = new JLabel(icon);
+				label8.setBounds(500,480,60,60);
+				add(label8);
+				
+				JLabel label9 = new JLabel();
+				label9.setBounds(565,200,60,60);
+				label9.setText(""+n1);
+				label9.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label9);
+				JLabel label10 = new JLabel();
+				label10.setBounds(565,270,60,60);
+				label10.setText(""+n2);
+				label10.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label10);
+				JLabel label11 = new JLabel();
+				label11.setBounds(565,340,60,60);
+				label11.setText(""+n3);
+				label11.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label11);
+				JLabel label12 = new JLabel();
+				label12.setBounds(565,410,60,60);
+				label12.setText(""+n4);
+				label12.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label12);
+				JLabel label13 = new JLabel();
+				label13.setBounds(565,480,60,60);
+				label13.setText(""+n5);
+				label13.setFont(new Font("標楷體", Font.BOLD, 32));
+				add(label13);
+			}
+			
+			
 			
 			//buttons
 			icon = new ImageIcon(ImageIO.read(new File("img/cultivate.gif")));
@@ -236,7 +355,12 @@ public class M extends JFrame implements ActionListener{
 			button5.addActionListener(this);
 			add(button5);
 
-			
+			JButton button6 = new JButton();
+			button6.setBounds(100,800,300,90);
+			button6.setText("孵化");
+			button6.setActionCommand("btn6");
+			button6.addActionListener(this);
+			add(button6);
 			
 			setVisible(true);
 
@@ -271,7 +395,9 @@ public class M extends JFrame implements ActionListener{
        	  flag=0;
        	  
        }
-        else{
+        else if(cmd == "btn6"){
+        	new Born();
+        }else{
         	 System.exit(1);
         }
 
@@ -303,10 +429,11 @@ public class M extends JFrame implements ActionListener{
 		
 		if(being == 1){
 			//img = ImageIO.read (new File("img/egg" + which + ".png"));
+			label1.setText("");
 			icon = new ImageIcon("img/egg"+which+".png");
 			label1.setIcon(icon);
-			label1.setText("");
 		}else{
+			label1.setIcon(null);
 			label1.setText("現在還沒有正在培養的蛋...");
 		}
 		}

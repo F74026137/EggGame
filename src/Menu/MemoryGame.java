@@ -26,17 +26,14 @@ class Location {
  
 
  
-public class MemoryGame{
+public class MemoryGame {
 	  boolean running=false;
       int result=0;
       MeGame frm = new MeGame();
     public  void run() {
     	running=true;
        
-    	
-    	frm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    
-    	frm.setLayout(null);
+        frm.setLayout(null);
         frm.setTitle("MemoryMeGame");
         frm.setSize(750, 750);
         frm.setLocation(0, 0);
@@ -47,7 +44,7 @@ public class MemoryGame{
         
       frm.Stop();
       frm.G();
-        
+        frm.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
  try{
 	 while(running){
 		 Thread.sleep(100);
@@ -90,7 +87,7 @@ public class MemoryGame{
       int wrong=0;
         public  MeGame() {
      
-        //	this.addWindowListener(new W_Listener());
+            
             
             icon[0] = new ImageIcon("img/peggy/" + "0.jpg");   //一開始圖片  
      

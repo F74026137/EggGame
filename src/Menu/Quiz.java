@@ -192,10 +192,10 @@ public class Quiz extends Game implements ActionListener{
 	
 	
 	public void actionPerformed(ActionEvent e){
-//		if(e.getActionCommand().equals("OK")){
-	//		loop=false;
-		//}
-		//else{
+		if(e.getActionCommand().equals("OK")){
+			loop=false;
+		}
+		else{
 		
 		time=TIME;
 		time_v.setText("Time:"+time);
@@ -208,6 +208,6 @@ public class Quiz extends Game implements ActionListener{
 		else y_n.setIcon(wrong);
 		
 			}
-	//}
+	}
 }
 

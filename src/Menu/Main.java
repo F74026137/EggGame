@@ -1,7 +1,4 @@
 package Menu;
-
-//import java.awt.event.*;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		M control = null;
 		int flag = 0;
 		String data = "";

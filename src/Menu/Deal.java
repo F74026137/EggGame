@@ -122,6 +122,51 @@ public class Deal extends JFrame implements ActionListener{
 				}
 			}
 			
+			if((obj.substring(0,4)).equals("star")){
+				//label.setText("已售出\n獲得NT10");
+				//System.out.println(obj.charAt(4));
+				button1.setEnabled(false);
+				button2.setEnabled(false);
+				button3.setText("離開");
+				
+				int earn;
+				if(obj.charAt(4) == '1')	earn = 500;
+				else if(obj.charAt(4) == '2') earn = 1000;
+				else earn = 10000;
+				
+				label.setText("已售出\n獲得NT" + earn);
+				try{
+					Scanner scanner = new Scanner(new FileInputStream("bin/money.txt"));
+					int money = scanner.nextInt();
+					scanner.close();
+					
+					PrintWriter writer0 = new PrintWriter(new FileOutputStream("bin/money.txt"));
+					writer0.println(money+earn);
+					writer0.flush();
+					writer0.close();
+					
+					PrintWriter writer1 = new PrintWriter(new FileOutputStream("bin/save.txt"));
+					int i;
+					for(i = 0;i < 8;i++)	if(i != index )writer1.print(" " + wb[i] + " ");
+					writer1.flush();
+					writer1.close();
+					
+					Scanner scanner2 = new Scanner(new FileInputStream("bin/fill.txt"));
+					int fill = scanner2.nextInt();
+					scanner2.close();
+					
+					PrintWriter writer2 = new PrintWriter(new FileOutputStream("bin/fill.txt"));
+					writer2.println(fill-1);
+					writer2.flush();
+					writer2.close();
+
+					
+					
+				}catch(FileNotFoundException e2){
+					e2.printStackTrace();
+				}
+			}
+			
 		}
 		
 		if(cmd.equals("outside")){
@@ -133,9 +178,6 @@ public class Deal extends JFrame implements ActionListener{
 				button3.setText("離開");
 				
 				try{
-					Scanner scanner = new Scanner(new FileInputStream("bin/money.txt"));
-					int money = scanner.nextInt();
-					scanner.close();
 					
 					PrintWriter writer1 = new PrintWriter(new FileOutputStream("bin/save.txt"));
 					int i;

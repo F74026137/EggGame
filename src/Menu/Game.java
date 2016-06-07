@@ -22,7 +22,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
-public class Game extends JFrame {
+
+abstract public class Game extends JFrame implements ActionListener {
 	/**
 	 * 
 	 */
@@ -46,7 +47,7 @@ public class Game extends JFrame {
 		this.setVisible(false);	
 		this.dispose();	
 	}
-//	abstract public String result();
+	abstract public String result();
 	
 	protected void setMouse(String route){
 		Image img=null;
@@ -96,7 +97,7 @@ public class Game extends JFrame {
 		JButton btn=new JButton("OK");
 		btn.setSize(50,40);
 		btn.setContentAreaFilled(false);		
-		btn.addActionListener(new H_Listener());
+		btn.addActionListener(this);
 		frame.add(text,BorderLayout.CENTER);
 		frame.add(btn,BorderLayout.SOUTH);
 		frame.setVisible(true);
@@ -112,7 +113,9 @@ public class Game extends JFrame {
 		
 	}
 	
-	
+	public void actionPerformed(ActionEvent e) {
+		
+	}
 	
 	class W_Listener implements WindowListener {
 		
@@ -230,15 +233,5 @@ public class Game extends JFrame {
 		}
 
 	}
-
-	class H_Listener implements ActionListener{
-
-		public void actionPerformed(ActionEvent e) {
-			loop=false;
-			
-		}
-		
-	}
-
 }
 
